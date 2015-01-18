@@ -1,10 +1,186 @@
 {
-  article: {
-    author: "The Editors",
-    publisher: "BloombergView.com",
-    date_published: "December 8th, 2014",
-    original_url: "http://www.bloombergview.com/articles/2014-08-24/the-perils-of-police-cameras",
-    title: "The Perils of Police Cameras",
-    sentences: ["There's an understandable tendency, after a crisis, to look for a quick fix: a new law, a new leader, a new technology that can make sure it never happens again.", "After prolonged unrest in Ferguson, Missouri, where a police officer killed an unarmed teenager, one such fix has been proposed again and again: Make cops wear body-mounted cameras.", "The idea is that cameras should help clarify confrontations between police and citizens and reverse the growing imbalance of power between them.", "But without proper safeguards, cameras could worsen both problems -- and create some new ones of their own.", "First, the potential for cameras to impartially resolve disputes shouldn't be oversold.", "Videos often lack critical context, and studies have repeatedly shown that jurors can be misled by variables such as a film's angle or focus, which can unduly sway perceptions of guilt.", "That cuts both ways: Footage of a protester bumping into a cop, devoid of context, could make life much easier on a prosecutor.", "Police cameras are also prone to intentional abuse.", "With mysterious frequency, they seem to accidentally get switched off or malfunction at critical moments.", "One obvious remedy is to require that cops always keep them on.", "But that can be counterproductive.", "Witnesses and victims may be less forthcoming on camera.", "Attracting competent officers could become harder if their every interaction is recorded. Crucially, officers may simply avoid engaging certain communities, or avoid areas where confrontations are likely, if they know they're being filmed.", "Finally, equipping police with cameras and audio recorders means that they're constantly conducting surveillance on innocent civilians -- and potentially storing it all.", "Police frequently enter private homes and encounter people in medical emergencies who may not want to be filmed. Some officers may be tempted to record people on the basis of race or religion.", "And some departments have asserted that the public has no right to see such footage.", "In short, a policy intended to empower the public and monitor the police could have precisely the opposite effect.", "And the idea seems likely to spread.", "Miami Beach plans to make building inspectors and meter maids wear cameras.", "Some sages have called for public-school classrooms to be under constant video surveillance.", "Librarians are public servants, too: Don't the people have a right to know how they wile away the hours among the stacks?", "As police departments increasingly experiment with this technology, they should proceed with caution.", "And the public should maintain a lot of skepticism.", "The first step should be to commission more research.", "One much-cited study found that equipping police with body cameras led to a reduction in the use of force and fewer official complaints of abuse.", "Replication of that research would be helpful, ideally in a study that considers whether police with cameras use less force because they're avoiding confrontations and whether reported crime increased during the period studied.", "Next, detailed rules are vital.", "It has to be clear when officers must turn the cameras on and when they can turn them off (at the request of a victim, say).", "Video should be retained only for short periods, and access to it should be limited and audited. Police should generally be required to alert the public that cameras are running, and people who are filmed should have the right to obtain the footage.", "Cops should also be assured that the cameras are a safeguard and not intended to monitor minor infractions on their part.", "Even with such rules in place, police cameras will require vigilance.", "The aftermath of a tragedy like Ferguson is generally a bad time to consider sweeping policy changes, especially if they invite erosions of liberty.", "Police cameras could be helpful in some situations.", "But the trade-offs will be steep.", "To contact the senior editor responsible for Bloomberg View's editorials: David Shipley at davidshipley@bloomberg.net."]
+  "article": {
+    "author": "The Editors",
+    "publisher": "BloombergView.com",
+    "date_published": "December 8th, 2014",
+    "original_url": "http://www.bloombergview.com/articles/2014-08-24/the-perils-of-police-cameras",
+    "title": "The Perils of Police Cameras",
+    "sentence": [
+      {
+        "text": "There's an understandable tendency, after a crisis, to look for a quick fix: a new law, a new leader, a new technology that can make sure it never happens again.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "After prolonged unrest in Ferguson, Missouri, where a police officer killed an unarmed teenager, one such fix has been proposed again and again: Make cops wear body-mounted cameras.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "The idea is that cameras should help clarify confrontations between police and citizens and reverse the growing imbalance of power between them.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "But without proper safeguards, cameras could worsen both problems -- and create some new ones of their own.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "First, the potential for cameras to impartially resolve disputes shouldn't be oversold.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Videos often lack critical context, and studies have repeatedly shown that jurors can be misled by variables such as a film's angle or focus, which can unduly sway perceptions of guilt.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "That cuts both ways: Footage of a protester bumping into a cop, devoid of context, could make life much easier on a prosecutor.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Police cameras are also prone to intentional abuse.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "With mysterious frequency, they seem to accidentally get switched off or malfunction at critical moments.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "One obvious remedy is to require that cops always keep them on.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "But that can be counterproductive.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Witnesses and victims may be less forthcoming on camera.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Attracting competent officers could become harder if their every interaction is recorded. Crucially, officers may simply avoid engaging certain communities, or avoid areas where confrontations are likely, if they know they're being filmed.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Finally, equipping police with cameras and audio recorders means that they're constantly conducting surveillance on innocent civilians -- and potentially storing it all.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Police frequently enter private homes and encounter people in medical emergencies who may not want to be filmed. Some officers may be tempted to record people on the basis of race or religion.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "And some departments have asserted that the public has no right to see such footage.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "In short, a policy intended to empower the public and monitor the police could have precisely the opposite effect.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "And the idea seems likely to spread.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Miami Beach plans to make building inspectors and meter maids wear cameras.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Some sages have called for public-school classrooms to be under constant video surveillance.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Librarians are public servants, too: Don't the people have a right to know how they wile away the hours among the stacks?",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "As police departments increasingly experiment with this technology, they should proceed with caution.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "And the public should maintain a lot of skepticism.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "The first step should be to commission more research.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "One much-cited study found that equipping police with body cameras led to a reduction in the use of force and fewer official complaints of abuse.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Replication of that research would be helpful, ideally in a study that considers whether police with cameras use less force because they're avoiding confrontations and whether reported crime increased during the period studied.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Next, detailed rules are vital.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "It has to be clear when officers must turn the cameras on and when they can turn them off (at the request of a victim, say).",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Video should be retained only for short periods, and access to it should be limited and audited. Police should generally be required to alert the public that cameras are running, and people who are filmed should have the right to obtain the footage.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Cops should also be assured that the cameras are a safeguard and not intended to monitor minor infractions on their part.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Even with such rules in place, police cameras will require vigilance.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "The aftermath of a tragedy like Ferguson is generally a bad time to consider sweeping policy changes, especially if they invite erosions of liberty.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "Police cameras could be helpful in some situations.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "But the trade-offs will be steep.",
+        "tags": [],
+        "comment": ""
+      },
+      {
+        "text": "To contact the senior editor responsible for Bloomberg View's editorials: David Shipley at davidshipley@bloomberg.net.",
+        "tags": [],
+        "comment": ""
+      }
+    ]
   }
 }
