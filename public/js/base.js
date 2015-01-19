@@ -52,23 +52,48 @@ function CarriageCtrl(view, model) {
 
 function CarriageView() {
   var self = this;
+  var sentence_tmpl = $('#sentence-tmpl').html()
 
   this.render = function(articleModel){
+    // render article metadata
+    // render sentences
+    var sentence_elements = []
     var sentenceIter = articleModel.sentenceGenerator()
     var next = sentenceIter.next()
     while (!next.done) {
-      self.buildSentence(next.value)
+      sentence_elements.push(self.buildSentence(next.value))
       next = sentenceIter.next()
     }
+    $('#container').append(sentence_elements)
   }
 
   this.buildSentence = function(sentence) {
-    $('#container').append(sentence.text)
+    return render(sentence_tmpl, sentence)
   }
 
   return this;
 
 }
+
+
+//*******************************************
+// THIRD PARTY
+//*******************************************
+
+// render function modified from riot.js framework
+var template_escape = {"\\": "\\\\", "\n": "\\n", "\r": "\\r", "'": "\\'"}
+
+function render(tmpl, data, escape_fn) {
+  tmpl = tmpl || '';
+  return ( new Function("_", "e", "return '" +
+    tmpl.replace(/[\\\n\r']/g, function(char) {
+      return template_escape[char];
+    }).replace(/{{\s*([\w\d\.]+)\s*}}/g, "' + (e?e(_.$1,'$1'):_.$1||(_.$1==null?'':_.$1)) + '") + "'")
+  )(data, escape_fn);
+};
+
+
+//*******************************************
 
 
 $(document).ready(function(){
