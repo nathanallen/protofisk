@@ -16,6 +16,7 @@ function ArticleModel() {
 
   this.save = function(article, cb) {
     self.title = article.title
+    self.author = article.author
     self.publisher = article.publisher 
     self.date_published = article.date_published
     self.original_url = article.original_url
@@ -56,19 +57,34 @@ function CarriageView() {
 
   this.render = function(articleModel){
     // render article metadata
+    $('#container').append(articleModel.title)
+    $('#container').append(articleModel.author)
+
     // render sentences
-    var sentence_elements = []
+    var new_elements = []
     var sentenceIter = articleModel.sentenceGenerator()
     var next = sentenceIter.next()
     while (!next.done) {
-      sentence_elements.push(self.buildSentence(next.value))
+      var $el = $(self.buildSentence(next.value))
+      new_elements.push(
+        bindListeners($el, next.value)
+      )
       next = sentenceIter.next()
     }
-    $('#container').append(sentence_elements)
+    $('#container').append(new_elements)
+
   }
 
   this.buildSentence = function(sentence) {
     return render(sentence_tmpl, sentence)
+  }
+
+  function bindListeners($el, self) {
+    return $el.click(function(){
+      $el = this;
+      self.text += "!"
+      $el.innerText = self.text
+    })
   }
 
   return this;
