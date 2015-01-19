@@ -2,33 +2,43 @@
 
 var app;
 
-function CarriageCtrl(view) {
-  this.view = new view(),
+function ArticleModel() {
   this.article_data = null;
+  // this.title = article.title
 
   this.getArticleJSON = function(cb) {
+    var self = this;
     $.getJSON('js/mock_data.json')
-     .done(cb)
+     .done(function(data){
+      self.article_data = data.article;
+      cb(data.article)
+    })
   }
+
+  return this;
+}
+
+function CarriageCtrl(view, model) {
+  this.view = new view(),
+  this.model = new model(),
+  this.article_data = null;
 
   this.init = function() {
     var self = this;
-    this.getArticleJSON(function(data){
-      self.article_data = data.article;
-      self.view.render(self.article_data);
-    })
+    this.model.getArticleJSON(self.view.render)
   }
 
   return this;
 
 }
 
-function carriageView() {
+function CarriageView() {
+  var self = this;
 
   this.render = function(article){
     var n = article.sentence.length
     for(var i=0; i<n; i++){
-      this.buildSentence(article.sentence[i])
+      self.buildSentence(article.sentence[i])
     }
   }
 
@@ -43,7 +53,7 @@ function carriageView() {
 
 $(document).ready(function(){
   
-  app = new CarriageCtrl( carriageView )
+  app = new CarriageCtrl( CarriageView, ArticleModel )
   app.init()
 
 })
