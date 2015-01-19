@@ -89,9 +89,9 @@ function CarriageView() {
 
   function addTags($tags_target, tags) {
     $tags_target.empty()
-    tags.forEach(function(v, i){
-      if (v == null) { return }
-      var $tag = $(render(tag_tmpl, {tag: v})).on('click', function(){
+    tags.forEach(function(tag, i){
+      if (tag == null) { return }
+      var $tag = $("<div class='tag'>" + tag + "</div>").on('click', function(){
         this.remove();
         tags[i] = null;
       })
