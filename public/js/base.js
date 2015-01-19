@@ -47,6 +47,11 @@ function CarriageCtrl(view, model) {
     })
   }
 
+  this.pprint = function() {
+    // utitlity function to pretty print model data
+    return JSON.stringify(this.model.sentence, null, 2)
+  }
+
   return this;
 
 }
