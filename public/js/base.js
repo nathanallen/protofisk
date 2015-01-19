@@ -94,9 +94,16 @@ function CarriageView() {
 
   function bindListeners($el, self) {
     return $el.on('click', '.sentence', function(e){
-      $el = e.target
-      self.text += "!"
-      $el.innerText = self.text
+      $('textarea').hide()
+      $textarea = $(this).siblings('textarea')
+      if (!$textarea.length) {
+        var $textarea = $('<textarea>' + self.comment + '</textarea>').on('blur', function(){
+          self.comment = $(this).val()
+        })
+        $(this).parent().append($textarea)
+      } else {
+        $textarea.show()
+      }
     })
   }
 

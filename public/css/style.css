@@ -1,10 +1,18 @@
-.sentence{
+.carriage{
+
+}
+
+.sentence {
   width: 60%;
   float: left;
 }
 
 .sentence:hover {
   background: yellow;
+}
+
+textarea {
+  width: 60%;
 }
 
 .tags {
