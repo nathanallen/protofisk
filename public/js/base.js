@@ -4,8 +4,6 @@ var app;
 
 function ArticleModel() {
   var self = this;
-  this.article_data = null;
-  // this.title = article.title
 
   this.getArticleJSON = function(cb) {
     $.getJSON('js/mock_data.json')
@@ -14,7 +12,7 @@ function ArticleModel() {
     })
   }
 
-  this.save = function(article, cb) {
+  this.save = function(article) {
     self.title = article.title
     self.author = article.author
     self.publisher = article.publisher 
@@ -38,7 +36,6 @@ function ArticleModel() {
 function CarriageCtrl(view, model) {
   this.view = new view()
   this.model = new model()
-  this.article_data = null;
 
   this.init = function() {
     var self = this;
@@ -64,9 +61,8 @@ function CarriageView() {
       $active_carriage = $('.carriage#active')
 
   this.render = function(articleModel){
-    // render article metadata
+    // render article header
     $('#container article').prepend(render($('#article-header-tmpl').html(), articleModel))
-    // $('#container').append(articleModel.author)
 
     // render sentences
     var new_elements = [],
