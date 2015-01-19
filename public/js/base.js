@@ -52,9 +52,10 @@ function CarriageCtrl(view, model) {
 }
 
 function CarriageView() {
-  var self = this;
-  var sentence_tmpl = $('#sentence-tmpl').html()
-  var tag_tmpl = $('#tag-tmpl').html()
+  var self = this,
+      sentence_tmpl = $('#sentence-tmpl').html(),
+      tag_tmpl = $('#tag-tmpl').html(),
+      $tag_picker = $($('#tag-picker-tmpl').html())
 
   this.render = function(articleModel){
     // render article metadata
@@ -95,14 +96,20 @@ function CarriageView() {
   function bindListeners($el, self) {
     return $el.on('click', '.sentence', function(e){
       $('textarea').hide()
-      $textarea = $(this).siblings('textarea')
+      var $parent = $(this).parent()
+      var $comment = $parent.find('div.editor div.comment')
+      var $textarea = $comment.find('textarea')
       if (!$textarea.length) {
-        var $textarea = $('<textarea>' + self.comment + '</textarea>').on('blur', function(){
+        $textarea = $('<textarea>' + self.comment + '</textarea>').on('blur', function(){
           self.comment = $(this).val()
         })
-        $(this).parent().append($textarea)
+        $comment.append($textarea)
+        $('#tag-picker').remove()
+        $parent.find('.tag-picker').append($tag_picker)
       } else {
         $textarea.show()
+        $('#tag-picker').remove()
+        $parent.find('.tag-picker').append($tag_picker)
       }
     })
   }

@@ -11,7 +11,7 @@
     
     <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" data-concat="false" data-remove="false"> -->
 
-    <link rel="stylesheet" href="css/app.full.min.css">
+    <!-- <link rel="stylesheet" href="css/app.full.min.css"> -->
     <link rel="stylesheet" href="css/style.css">
 
     <!-- JS -->
@@ -32,9 +32,13 @@
 
   <!-- templates -->
   <script type="text/tmpl" id="sentence-tmpl">
-    <div class="carriage">
+    <div class="carriage clearfix">
       <div class='sentence'>{{text}}</div>
       <div class='tags'></div>
+      <div class='editor clearfix'>
+        <div class='comment'></div>
+        <div class='tag-picker'></div>
+      </div>
     </div>
   </script>
 
@@ -43,7 +47,7 @@
   </script>
 
   <script type="text/tmpl" id="tag-picker-tmpl">
-    <div class="tag-picker">
+    <div id="tag-picker">
       <div class='tag'>True</div>
       <div class='tag'>False</div>
       <div class='tag'>Matter of Opinion</div>
