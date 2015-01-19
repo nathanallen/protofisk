@@ -68,14 +68,16 @@ function CarriageView() {
     $('#container').append(articleModel.author)
 
     // render sentences
-    var new_elements = []
-    var sentenceIter = articleModel.sentenceGenerator()
-    var next = sentenceIter.next()
+    var new_elements = [],
+        sentenceIter = articleModel.sentenceGenerator(),
+        next = sentenceIter.next(),
+        sentence;
     while (!next.done) {
-      var $el = $(self.buildSentence(next.value))
-      addTags($el.find('.tags'), next.value.tags)
+      sentence = next.value; // the sentence object
+      var $el = $(self.buildSentence(sentence))
+      addTags($el.find('.tags'), sentence.tags)
       new_elements.push(
-        bindListeners($el, next.value)
+        bindListeners($el, sentence)
       )
       next = sentenceIter.next()
     }
@@ -90,50 +92,50 @@ function CarriageView() {
   function addTags($el, tags) {
     $el.empty()
     tags.forEach(function(v, i){
-      if (v == undefined) { return }
+      if (v == null) { return }
       var $tag = $(render(tag_tmpl, {tag: v})).on('click', function(){
         this.remove();
-        tags[i] = undefined;
+        tags[i] = null;
       })
       $el.append($tag)
     })
   }
 
-  function bindListeners($el, self) {
+  function bindListeners($el, sentence) {
     return $el.on('click', '.sentence', function(e){
-      toggleCarriage($(this), self)
+      toggleCarriage($(this), sentence)
     })
   }
 
-  function toggleCarriage($this, self) {
+  function toggleCarriage($this, sentence) {
     $('.editor').hide()
     var $editor = $this.parent().find('div.editor').show()
     var $comment = $editor.find('div.comment')
     if (!$comment.find('textarea').length) {
-      var $textarea = $('<textarea>' + self.comment + '</textarea>').on('blur', function(){
-        self.comment = $this.val()
+      var $textarea = $('<textarea>' + sentence.comment + '</textarea>').on('blur', function(){
+        sentence.comment = $this.val()
       })
       $comment.append($textarea)
     }
-    moveAndRebindTagPicker($editor, self)
+    moveAndRebindTagPicker($editor, sentence)
   }
 
-  function moveAndRebindTagPicker($target, self) {
+  function moveAndRebindTagPicker($target, sentence) {
     $('#tag-picker').remove()
     $tag_picker.on('click', '.tag', function(){
-      addOrRemoveTags($(this).text(), self, $target)
+      addOrRemoveTags($(this).text(), sentence.tags, $target)
     })
     $target.find('.tag-picker').append($tag_picker)
   }
 
-  function addOrRemoveTags(tag, self, $old_target) {
-    var idx = self.tags.indexOf(tag)
+  function addOrRemoveTags(tag, tags, $old_target) {
+    var idx = tags.indexOf(tag)
     if ( idx === -1 ){
-      self.tags.push(tag)
+      tags.push(tag)
     } else {
-      self.tags[idx] = undefined
+      tags[idx] = null;
     }
-    addTags($old_target.parent('.carriage').find('.tags'), self.tags)
+    addTags($old_target.parent('.carriage').find('.tags'), tags)
   }
 
   return this;
