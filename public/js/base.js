@@ -58,7 +58,7 @@ function CarriageCtrl(view, model) {
 
 function CarriageView() {
   var self = this,
-      sentence_tmpl = $('#sentence-tmpl').html(),
+      carriage_tmpl = $('#carriage-tmpl').html(),
       tag_tmpl = $('#tag-tmpl').html(),
       $tag_picker = $($('#tag-picker-tmpl').html()),
       $active_carriage = $('.carriage#active')
@@ -75,10 +75,11 @@ function CarriageView() {
         sentence;
     while (!next.done) {
       sentence = next.value; // the sentence object
-      var $el = $(render(sentence_tmpl, sentence))
-      addTags($el.find('.tags'), sentence.tags)
+      var $carriage = $(render(carriage_tmpl, sentence))
+      addTags($carriage.find('.tags'), sentence.tags)
+      addCommentArea($carriage, sentence)
       new_elements.push(
-        bindListeners($el, sentence)
+        bindListeners($carriage, sentence)
       )
       next = sentenceIter.next()
     }
@@ -86,20 +87,20 @@ function CarriageView() {
 
   }
 
-  function addTags($el, tags) {
-    $el.empty()
+  function addTags($tags_target, tags) {
+    $tags_target.empty()
     tags.forEach(function(v, i){
       if (v == null) { return }
       var $tag = $(render(tag_tmpl, {tag: v})).on('click', function(){
         this.remove();
         tags[i] = null;
       })
-      $el.append($tag)
+      $tags_target.append($tag)
     })
   }
 
-  function bindListeners($el, sentence) {
-    return $el.on('click', '.sentence', function(e){
+  function bindListeners($carriage, sentence) {
+    return $carriage.on('click', '.sentence', function(){
       toggleActiveCarriage($(this), sentence)
     })
   }
@@ -113,18 +114,14 @@ function CarriageView() {
   function toggleActiveEditor($this, sentence) {
     $active_carriage.length && $active_carriage.attr('id', '').find('div.editor').hide()
     $active_carriage = $this.parent('.carriage').attr('id', 'active')
-    var $editor = $active_carriage.find('div.editor').show()
-    addCommentArea($editor, sentence)
+    $active_carriage.find('div.editor').show()
   }
 
-  function addCommentArea($editor, sentence) {
-    if ($editor.find('div.comment textarea').length) {
-      return false // textarea already exists
-    }
+  function addCommentArea($carriage, sentence) {
     var $textarea = $('<textarea>' + sentence.comment + '</textarea>').on('blur', function(){
       sentence.comment = $(this).val()
     })
-    $editor.find('div.comment').append($textarea)
+    $carriage.find('.editor div.comment').append($textarea)
   }
 
   function moveAndRebindTagPicker(tags) {
