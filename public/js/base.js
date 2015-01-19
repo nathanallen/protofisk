@@ -2,6 +2,40 @@
 
 var app;
 
+$(document).ready(function(){  
+  app = new ArticleCtrl( ArticleView, ArticleModel )
+  app.init()
+})
+
+
+//*******************************************
+// Article Control
+//*******************************************
+
+function ArticleCtrl(view, model) {
+  this.view = new view()
+  this.model = new model()
+
+  this.init = function() {
+    var self = this;
+    this.model.getArticleJSON(function(_){
+      self.view.render(self.model)
+    })
+  }
+
+  this.pprint = function() {
+    // utitlity function to pretty print model data
+    return JSON.stringify(this.model.sentence, null, 2)
+  }
+
+  return this;
+
+}
+
+//*******************************************
+// Article Model: Article Data & User Annotations
+//*******************************************
+
 function ArticleModel() {
   var self = this;
 
@@ -33,27 +67,11 @@ function ArticleModel() {
   return this;
 }
 
-function CarriageCtrl(view, model) {
-  this.view = new view()
-  this.model = new model()
+//*******************************************
+// Article View & Directives
+//*******************************************
 
-  this.init = function() {
-    var self = this;
-    this.model.getArticleJSON(function(_){
-      self.view.render(self.model)
-    })
-  }
-
-  this.pprint = function() {
-    // utitlity function to pretty print model data
-    return JSON.stringify(this.model.sentence, null, 2)
-  }
-
-  return this;
-
-}
-
-function CarriageView() {
+function ArticleView() {
   var self = this,
       carriage_tmpl = $('#carriage-tmpl').html(),
       tag_tmpl = $('#tag-tmpl').html(),
@@ -97,11 +115,11 @@ function CarriageView() {
 
   function bindListeners($carriage, sentence) {
     return $carriage.on('click', '.sentence', function(){
-      toggleActiveCarriage($(this), sentence)
+      toggleActiveArticle($(this), sentence)
     })
   }
 
-  function toggleActiveCarriage($this, sentence) {
+  function toggleActiveArticle($this, sentence) {
     if ($this.parent('.carriage#active').length){ return false }
     toggleActiveEditor($this, sentence)
     moveAndRebindTagPicker(sentence.tags)
@@ -162,11 +180,3 @@ function render(tmpl, data, escape_fn) {
 
 
 //*******************************************
-
-
-$(document).ready(function(){
-  
-  app = new CarriageCtrl( CarriageView, ArticleModel )
-  app.init()
-
-})
