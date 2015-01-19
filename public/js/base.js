@@ -60,7 +60,8 @@ function CarriageView() {
   var self = this,
       sentence_tmpl = $('#sentence-tmpl').html(),
       tag_tmpl = $('#tag-tmpl').html(),
-      $tag_picker = $($('#tag-picker-tmpl').html())
+      $tag_picker = $($('#tag-picker-tmpl').html()),
+      $active_carriage = $('.carriage#active')
 
   this.render = function(articleModel){
     // render article metadata
@@ -108,8 +109,9 @@ function CarriageView() {
   }
 
   function toggleCarriage($this, sentence) {
-    $('.editor').hide()
-    var $editor = $this.parent().find('div.editor').show()
+    $active_carriage.length && $active_carriage.attr('id', '').find('div.editor').hide()
+    $active_carriage = $this.parent('.carriage').attr('id', 'active')
+    var $editor = $active_carriage.find('div.editor').show()
     var $comment = $editor.find('div.comment')
     if (!$comment.find('textarea').length) {
       var $textarea = $('<textarea>' + sentence.comment + '</textarea>').on('blur', function(){
@@ -128,14 +130,14 @@ function CarriageView() {
     $target.find('.tag-picker').append($tag_picker)
   }
 
-  function addOrRemoveTags(tag, tags, $old_target) {
+  function addOrRemoveTags(tag, tags, $click_target) {
     var idx = tags.indexOf(tag)
     if ( idx === -1 ){
       tags.push(tag)
     } else {
       tags[idx] = null;
     }
-    addTags($old_target.parent('.carriage').find('.tags'), tags)
+    addTags($click_target.parent('.carriage').find('.tags'), tags)
   }
 
   return this;
