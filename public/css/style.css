@@ -1,0 +1,21 @@
+.sentence{
+  width: 60%;
+  float: left;
+}
+
+.sentence:hover {
+  background: yellow;
+}
+
+.tags {
+  float: left;
+  width: 30%;
+}
+
+.tag {
+  display: inline-block;
+  text-align: center;
+  width: 50%;
+  border: 1px solid black;
+  border-radius: 10px;
+}
