@@ -100,31 +100,40 @@ function CarriageView() {
 
   function bindListeners($el, sentence) {
     return $el.on('click', '.sentence', function(e){
-      toggleCarriage($(this), sentence)
+      toggleActiveCarriage($(this), sentence)
     })
   }
 
-  function toggleCarriage($this, sentence) {
+  function toggleActiveCarriage($this, sentence) {
+    if ($this.parent('.carriage#active').length){ return false }
+    toggleActiveEditor($this, sentence)
+    moveAndRebindTagPicker(sentence.tags)
+  }
+
+  function toggleActiveEditor($this, sentence) {
     $active_carriage.length && $active_carriage.attr('id', '').find('div.editor').hide()
     $active_carriage = $this.parent('.carriage').attr('id', 'active')
     var $editor = $active_carriage.find('div.editor').show()
-    var $comment = $editor.find('div.comment')
-    if (!$comment.find('textarea').length) {
-      var $textarea = $('<textarea>' + sentence.comment + '</textarea>').on('blur', function(){
-        sentence.comment = $this.val()
-      })
-      $comment.append($textarea)
-    }
-    moveAndRebindTagPicker(sentence.tags, $active_carriage)
+    addCommentArea($editor, sentence)
   }
 
-  function moveAndRebindTagPicker(tags, $carriage) {
+  function addCommentArea($editor, sentence) {
+    if ($editor.find('div.comment textarea').length) {
+      return false // textarea already exists
+    }
+    var $textarea = $('<textarea>' + sentence.comment + '</textarea>').on('blur', function(){
+      sentence.comment = $(this).val()
+    })
+    $editor.find('div.comment').append($textarea)
+  }
+
+  function moveAndRebindTagPicker(tags) {
     $('#tag-picker').remove()
     $tag_picker.on('click', '.tag', function(){
       var tag = $(this).text()
-      addOrRemoveTags(tags, tag, $carriage)
+      addOrRemoveTags(tags, tag, $active_carriage)
     })
-    $carriage.find('.tag-picker').append($tag_picker)
+    $active_carriage.find('.tag-picker').append($tag_picker)
   }
 
   function addOrRemoveTags(tags, tag, $carriage) {
