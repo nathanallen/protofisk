@@ -3,29 +3,47 @@
 var app;
 
 function ArticleModel() {
+  var self = this;
   this.article_data = null;
   // this.title = article.title
 
   this.getArticleJSON = function(cb) {
-    var self = this;
     $.getJSON('js/mock_data.json')
      .done(function(data){
-      self.article_data = data.article;
-      cb(data.article)
+        cb(self.save(data.article))
     })
+  }
+
+  this.save = function(article, cb) {
+    self.title = article.title
+    self.publisher = article.publisher 
+    self.date_published = article.date_published
+    self.original_url = article.original_url
+    self.title = article.title
+    self.sentence = article.sentence
+    return self
+  }
+
+  this.sentenceGenerator = function* () {
+    var n = this.sentence.length
+    for(var i=0; i<n; i++) {
+      yield self.sentence[i];
+    }
   }
 
   return this;
 }
 
 function CarriageCtrl(view, model) {
-  this.view = new view(),
-  this.model = new model(),
+  this.view = new view()
+  this.model = new model()
   this.article_data = null;
 
   this.init = function() {
     var self = this;
-    this.model.getArticleJSON(self.view.render)
+    this.model.getArticleJSON(function(_){
+      self.view.render(self.model)
+    })
   }
 
   return this;
@@ -35,10 +53,12 @@ function CarriageCtrl(view, model) {
 function CarriageView() {
   var self = this;
 
-  this.render = function(article){
-    var n = article.sentence.length
-    for(var i=0; i<n; i++){
-      self.buildSentence(article.sentence[i])
+  this.render = function(articleModel){
+    var sentenceIter = articleModel.sentenceGenerator()
+    var next = sentenceIter.next()
+    while (!next.done) {
+      self.buildSentence(next.value)
+      next = sentenceIter.next()
     }
   }
 
