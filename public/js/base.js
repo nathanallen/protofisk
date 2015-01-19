@@ -65,8 +65,8 @@ function CarriageView() {
 
   this.render = function(articleModel){
     // render article metadata
-    $('#container').append(articleModel.title)
-    $('#container').append(articleModel.author)
+    $('#container article').prepend(render($('#article-header-tmpl').html(), articleModel))
+    // $('#container').append(articleModel.author)
 
     // render sentences
     var new_elements = [],
@@ -83,7 +83,7 @@ function CarriageView() {
       )
       next = sentenceIter.next()
     }
-    $('#container').append(new_elements)
+    $('#container article').append(new_elements)
 
   }
 
