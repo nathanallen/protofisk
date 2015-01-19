@@ -95,23 +95,26 @@ function CarriageView() {
 
   function bindListeners($el, self) {
     return $el.on('click', '.sentence', function(e){
-      $('textarea').hide()
-      var $parent = $(this).parent()
-      var $comment = $parent.find('div.editor div.comment')
-      var $textarea = $comment.find('textarea')
-      if (!$textarea.length) {
-        $textarea = $('<textarea>' + self.comment + '</textarea>').on('blur', function(){
-          self.comment = $(this).val()
-        })
-        $comment.append($textarea)
-        $('#tag-picker').remove()
-        $parent.find('.tag-picker').append($tag_picker)
-      } else {
-        $textarea.show()
-        $('#tag-picker').remove()
-        $parent.find('.tag-picker').append($tag_picker)
-      }
+      toggleCarriage($(this), self)
     })
+  }
+
+  function toggleCarriage($this, self) {
+    $('.editor').hide()
+    var $editor = $this.parent().find('div.editor').show()
+    var $comment = $editor.find('div.comment')
+    if (!$comment.find('textarea').length) {
+      var $textarea = $('<textarea>' + self.comment + '</textarea>').on('blur', function(){
+        self.comment = $this.val()
+      })
+      $comment.append($textarea)
+    }
+    moveTagPicker($editor)
+  }
+
+  function moveTagPicker($target) {
+    $('#tag-picker').remove()
+    $target.find('.tag-picker').append($tag_picker)
   }
 
   return this;
