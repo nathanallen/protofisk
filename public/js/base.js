@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 
 //*******************************************
-// Article Control
+// Article Controller
 //*******************************************
 
 function ArticleCtrl(view, model) {
@@ -101,6 +101,17 @@ function ArticleView() {
 
   }
 
+  // render function modified from riot.js framework
+  var template_escape = {"\\": "\\\\", "\n": "\\n", "\r": "\\r", "'": "\\'"}
+  function render(tmpl, data, escape_fn) {
+    tmpl = tmpl || '';
+    return ( new Function("_", "e", "return '" +
+      tmpl.replace(/[\\\n\r']/g, function(char) {
+        return template_escape[char];
+      }).replace(/{{\s*([\w\d\.]+)\s*}}/g, "' + (e?e(_.$1,'$1'):_.$1||(_.$1==null?'':_.$1)) + '") + "'")
+    )(data, escape_fn);
+  };
+
   function addTags($tags_target, tags) {
     $tags_target.empty()
     tags.forEach(function(tag, i){
@@ -160,23 +171,3 @@ function ArticleView() {
   return this;
 
 }
-
-
-//*******************************************
-// THIRD PARTY
-//*******************************************
-
-// render function modified from riot.js framework
-var template_escape = {"\\": "\\\\", "\n": "\\n", "\r": "\\r", "'": "\\'"}
-
-function render(tmpl, data, escape_fn) {
-  tmpl = tmpl || '';
-  return ( new Function("_", "e", "return '" +
-    tmpl.replace(/[\\\n\r']/g, function(char) {
-      return template_escape[char];
-    }).replace(/{{\s*([\w\d\.]+)\s*}}/g, "' + (e?e(_.$1,'$1'):_.$1||(_.$1==null?'':_.$1)) + '") + "'")
-  )(data, escape_fn);
-};
-
-
-//*******************************************
