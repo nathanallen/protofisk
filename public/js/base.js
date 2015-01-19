@@ -54,6 +54,7 @@ function CarriageCtrl(view, model) {
 function CarriageView() {
   var self = this;
   var sentence_tmpl = $('#sentence-tmpl').html()
+  var tag_tmpl = $('#tag-tmpl').html()
 
   this.render = function(articleModel){
     // render article metadata
@@ -66,6 +67,7 @@ function CarriageView() {
     var next = sentenceIter.next()
     while (!next.done) {
       var $el = $(self.buildSentence(next.value))
+      addTags($el.find('.tags'), next.value.tags)
       new_elements.push(
         bindListeners($el, next.value)
       )
@@ -79,9 +81,20 @@ function CarriageView() {
     return render(sentence_tmpl, sentence)
   }
 
+  function addTags($el, tags) {
+    $el.empty()
+    tags.forEach(function(v, i){
+      var $tag = $(render(tag_tmpl, {tag: v})).on('click', function(){
+        this.remove();
+        delete tags[i];
+      })
+      $el.append($tag)
+    })
+  }
+
   function bindListeners($el, self) {
-    return $el.click(function(){
-      $el = this;
+    return $el.on('click', '.sentence', function(e){
+      $el = e.target
       self.text += "!"
       $el.innerText = self.text
     })
