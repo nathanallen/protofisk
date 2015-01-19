@@ -75,7 +75,7 @@ function CarriageView() {
         sentence;
     while (!next.done) {
       sentence = next.value; // the sentence object
-      var $el = $(self.buildSentence(sentence))
+      var $el = $(render(sentence_tmpl, sentence))
       addTags($el.find('.tags'), sentence.tags)
       new_elements.push(
         bindListeners($el, sentence)
@@ -84,10 +84,6 @@ function CarriageView() {
     }
     $('#container').append(new_elements)
 
-  }
-
-  this.buildSentence = function(sentence) {
-    return render(sentence_tmpl, sentence)
   }
 
   function addTags($el, tags) {
