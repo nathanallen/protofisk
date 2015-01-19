@@ -115,25 +115,26 @@ function CarriageView() {
       })
       $comment.append($textarea)
     }
-    moveAndRebindTagPicker($editor, sentence)
+    moveAndRebindTagPicker(sentence.tags, $active_carriage)
   }
 
-  function moveAndRebindTagPicker($target, sentence) {
+  function moveAndRebindTagPicker(tags, $carriage) {
     $('#tag-picker').remove()
     $tag_picker.on('click', '.tag', function(){
-      addOrRemoveTags($(this).text(), sentence.tags, $target)
+      var tag = $(this).text()
+      addOrRemoveTags(tags, tag, $carriage)
     })
-    $target.find('.tag-picker').append($tag_picker)
+    $carriage.find('.tag-picker').append($tag_picker)
   }
 
-  function addOrRemoveTags(tag, tags, $click_target) {
+  function addOrRemoveTags(tags, tag, $carriage) {
     var idx = tags.indexOf(tag)
     if ( idx === -1 ){
       tags.push(tag)
     } else {
       tags[idx] = null;
     }
-    addTags($click_target.parent('.carriage').find('.tags'), tags)
+    addTags($carriage.find('.tags'), tags)
   }
 
   return this;
