@@ -85,9 +85,10 @@ function CarriageView() {
   function addTags($el, tags) {
     $el.empty()
     tags.forEach(function(v, i){
+      if (v == undefined) { return }
       var $tag = $(render(tag_tmpl, {tag: v})).on('click', function(){
         this.remove();
-        delete tags[i];
+        tags[i] = undefined;
       })
       $el.append($tag)
     })
@@ -109,12 +110,25 @@ function CarriageView() {
       })
       $comment.append($textarea)
     }
-    moveTagPicker($editor)
+    moveAndRebindTagPicker($editor, self)
   }
 
-  function moveTagPicker($target) {
+  function moveAndRebindTagPicker($target, self) {
     $('#tag-picker').remove()
+    $tag_picker.on('click', '.tag', function(){
+      addOrRemoveTags($(this).text(), self, $target)
+    })
     $target.find('.tag-picker').append($tag_picker)
+  }
+
+  function addOrRemoveTags(tag, self, $old_target) {
+    var idx = self.tags.indexOf(tag)
+    if ( idx === -1 ){
+      self.tags.push(tag)
+    } else {
+      self.tags[idx] = undefined
+    }
+    addTags($old_target.parent('.carriage').find('.tags'), self.tags)
   }
 
   return this;
